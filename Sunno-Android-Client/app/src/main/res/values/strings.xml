@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Sunno</string>
+    <string name="musicPlayer_text">Here Imma add muisc dets</string>
+    <string name="song_name">Song name</string>
+    <string name="artist_name">Artist name</string>
 </resources>

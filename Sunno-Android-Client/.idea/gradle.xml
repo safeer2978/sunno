@@ -7,13 +7,14 @@
         <option name="testRunner" value="PLATFORM" />
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="C:/Program Files/Gradle" />
+        <option name="gradleHome" value="C:/Gradle/gradle-6.6-rc-1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
+        <option name="resolveExternalAnnotations" value="false" />
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
