@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        //TODO: Maddie Please make changes here
 
         slideUp=new SlideUp(slideView);
         slideUp.hideImmediately();
