@@ -3,4 +3,8 @@
     <string name="musicPlayer_text">Here Imma add muisc dets</string>
     <string name="song_name">Song name</string>
     <string name="artist_name">Artist name</string>
+    <string name="home">Home</string>
+    <string name="favorite">Favorite</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
 </resources>

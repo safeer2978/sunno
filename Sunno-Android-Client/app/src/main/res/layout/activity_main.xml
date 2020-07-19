@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,78 +8,66 @@
     tools:context=".MainActivity">
 
     <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navBar"/>
+
+    
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navBar"
+        app:menu="@menu/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"/>
+
+
+    <FrameLayout
         android:id="@+id/dim"
         android:alpha="0"
         android:fitsSystemWindows="true"
         android:background="@android:color/black"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="550dp">
 
     </FrameLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="377dp"
-        android:layout_height="102dp"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991"
-        app:srcCompat="@android:drawable/ic_dialog_email">
-
-        <SeekBar
-            android:id="@+id/seekBar_crd"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_height="30dp" />
+            android:layout_height="58dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_alignBottom="@+id/dim"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.991"
+            app:srcCompat="@android:drawable/ic_dialog_email">
 
-        <TextView
-            android:id="@+id/songname_textview_crd"
-            android:layout_width="wrap_content"
-            android:textSize="25sp"
-            android:layout_height="match_parent"
-            android:text="@string/song_name" />
-
-        <TextView
-            android:id="@+id/artistname_textview_crd"
-            android:layout_width="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginVertical="25dp"
-            android:layout_height="match_parent"
-            android:text="@string/artist_name" />
-
-
-        <ImageButton
-            android:id="@+id/seekBackButton_crd"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_gravity="end"
-            android:layout_marginRight="130dp"
-            android:src="@android:drawable/ic_media_rew"
-            />
-
-        <ImageButton
-            android:id="@+id/playButton_crd"
-            android:layout_width="wrap_content"
-            android:layout_marginRight="65dp"
-            android:layout_height="50dp"
-            android:layout_gravity="end"
-            android:src="@android:drawable/ic_media_play" />
-
-        <ImageButton
-            android:id="@+id/seekForwardButton_crd"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_gravity="end"
-            android:src="@android:drawable/ic_media_ff" />
+            <TextView
+                android:id="@+id/songname_textview_crd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Maku Maku"
+                android:textSize="25sp" />
 
 
-    </androidx.cardview.widget.CardView>
+            <ImageButton
+                android:id="@+id/playButton_crd"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:layout_marginRight="65dp"
+                android:src="@android:drawable/ic_media_play" />
+
+
+        </androidx.cardview.widget.CardView>
 
     <include layout="@layout/content_main" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

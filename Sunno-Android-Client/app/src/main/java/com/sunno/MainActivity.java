@@ -1,11 +1,16 @@
 package com.sunno;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,7 +19,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mancj.slideup.SlideUp;
+import com.mancj.slideup.SlideUpBuilder;
 
 import java.io.IOException;
 
@@ -26,13 +33,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private View slideView;
     private CardView crd;
 
+    private BottomNavigationView bottomNavView;
+
     //CardView Widgets
+    private ImageButton playBtn_mp;
     private ImageButton playBtn_crd;
-    private ImageButton forwardBtn_crd;
-    private ImageButton backButton_crd;
-    private SeekBar seekBar_crd;
+    private ImageButton nextBtn_mp;
+    private ImageButton prevBtn_mp;
+    private SeekBar seekBar_mp;
     private TextView songNameTextView_crd;
     private TextView artistNameTextView_crd;
+    private Handler mHandler;
 
 
     //https://www.mboxdrive.com/Molecule%20-%20MAFA%20(ETIYINMELO.COM.NG).mp3
@@ -41,17 +52,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        bottomNavView=findViewById(R.id.navBar);
+        bottomNavView.setOnNavigationItemSelectedListener(navListener);
         slideView=findViewById(R.id.slideView);
         dim=findViewById(R.id.dim);
+        playBtn_mp=findViewById(R.id.playbtn_mp);
         crd=findViewById(R.id.cardView);
         playBtn_crd=findViewById(R.id.playButton_crd);
-        seekBar_crd=findViewById(R.id.seekBar_crd);
-        forwardBtn_crd=findViewById(R.id.seekForwardButton_crd);
-        forwardBtn_crd.setOnClickListener(this);
-        backButton_crd=findViewById(R.id.seekBackButton_crd);
-        backButton_crd.setOnClickListener(this);
+        seekBar_mp=findViewById(R.id.seekBar_mp);
+
+        mHandler=new Handler();
 
 
+///IMPLEMENTING MUSIC PLAYER
 
         mediaPlayer=new MediaPlayer();
         try {
@@ -72,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onPrepared(final MediaPlayer mp) {
                 //String Duration= String.valueOf(mp.getDuration());
                 //endText.setText(Duration);
-                seekBar_crd.setMax(mp.getDuration());
+                seekBar_mp.setMax(mp.getDuration());
                 playBtn_crd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -86,12 +99,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
+                playBtn_mp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+//                        Toast.makeText(MainActivity.this, "Music Starts", Toast.LENGTH_SHORT).show();
+                        if(mp.isPlaying()){
+                            mp.pause();
+                            playBtn_mp.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+                        }
+                        else{
+                            mp.start();
+                            playBtn_mp.setImageResource(R.drawable.ic_baseline_pause_24);
+                        }
+                    }
+                });
             }
         });
 
         mediaPlayer.prepareAsync();
 
-        seekBar_crd.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        MainActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(mediaPlayer!=null)
+                {
+                    int mduration=mediaPlayer.getCurrentPosition();
+                    seekBar_mp.setProgress(mduration);
+                }
+                mHandler.postDelayed(this,1000);
+            }
+        });
+
+
+
+        seekBar_mp.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             if(fromUser){
@@ -110,46 +152,73 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        //TODO: Maddie Please make changes here
+///IMPLEMENTING SLIDING FUNCTIONALITY
+//Todo:Fucking crd view dosen't View.gone when I pull up
+        slideUp=new SlideUpBuilder(slideView)
+                .withStartState(SlideUp.State.HIDDEN)
+                .withStartGravity(Gravity.BOTTOM)
+                .withListeners(new SlideUp.Listener.Events() {
+                    @Override
+                    public void onSlide(float v) {
+                        dim.setAlpha(1 - v / 100);
+                    }
 
-        slideUp=new SlideUp(slideView);
-        slideUp.hideImmediately();
+                    @Override
+                    public void onVisibilityChanged(int visibility) {
+                        crd.setVisibility(View.VISIBLE);
+                    }
+                })
+                .build();
+
 
         crd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                slideUp.animateIn();
-                crd.setVisibility(View.GONE);
-            }
-        });
-        slideUp.setSlideListener(new SlideUp.SlideListener() {
-            @Override
-            public void onSlideDown(float v) {
-                dim.setAlpha(1 - v / 100);
-            }
+      @Override
+      public void onClick(View v) {
+          crd.setVisibility(View.INVISIBLE);
+          slideUp.show();
+      }
+  });
 
-            @Override
-            public void onVisibilityChanged(int i) {
-
-                if(i==View.GONE)
-                {
-                    crd.setVisibility(View.VISIBLE);
-                }
-            }
-        });
 
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener=
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                    Fragment selectedFragment = null;
+                     switch (item.getItemId() ){
+                         case R.id.nav_home:
+                             selectedFragment=new HomeFragment();
+                             break;
+                         case R.id.nav_favorites:
+                             selectedFragment=new FavFragment();
+                             break;
+                         case R.id.nav_search:
+                             selectedFragment=new SearchFragment();
+                             break;
+                         case R.id.nav_profile:
+                             selectedFragment=new ProfileFragment();
+                             break;
+                     }
+
+                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+
+                     return true;
+                }
+            };
 
 
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
-            case R.id.seekForwardButton_crd:
-                break;
-            case R.id.seekBackButton_crd:
-                break;
-        }
+//        switch (v.getId()){
+//            case R.id.seekForwardButton_crd:
+//                break;
+//            case R.id.seekBackButton_crd:
+//                break;
+//        }
     }
 
 @Override
