@@ -4,18 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,12 +23,15 @@ import com.mancj.slideup.SlideUp;
 import com.mancj.slideup.SlideUpBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private MediaPlayer mediaPlayer;
     private SlideUp slideUp;
     private View dim;
+    private View fragmentContainter;
     private View slideView;
     private CardView crd;
 
@@ -60,9 +62,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         crd=findViewById(R.id.cardView);
         playBtn_crd=findViewById(R.id.playButton_crd);
         seekBar_mp=findViewById(R.id.seekBar_mp);
+        fragmentContainter=findViewById(R.id.fragment_container);
+
+
 
         mHandler=new Handler();
-
 
 ///IMPLEMENTING MUSIC PLAYER
 
@@ -77,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onCompletion(MediaPlayer mp) {
                 int duration=mp.getDuration();
-                Toast.makeText(MainActivity.this, String.valueOf((duration/1000)/60), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, String.valueOf((duration/1000)/60), Toast.LENGTH_SHORT).show();
             }
         });
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -187,6 +191,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+//                    if(item.getItemId()==R.id.nav_home){
+//
+//                        fragmentContainter.setVisibility(View.GONE);
+//                    }
+
                     Fragment selectedFragment = null;
                      switch (item.getItemId() ){
                          case R.id.nav_home:
@@ -200,10 +209,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                              break;
                          case R.id.nav_profile:
                              selectedFragment=new ProfileFragment();
+
                              break;
                      }
-
-                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
 
                      return true;
                 }
@@ -212,14 +221,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-
-//        switch (v.getId()){
-//            case R.id.seekForwardButton_crd:
-//                break;
-//            case R.id.seekBackButton_crd:
-//                break;
-//        }
     }
+
 
 @Override
 protected void onDestroy() {

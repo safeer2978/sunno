@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,15 +11,22 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/navBar"/>
+        android:layout_above="@+id/navBar">
 
-    
+    </FrameLayout>
+
+
+
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navBar"
-        app:menu="@menu/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="#F6F1F1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation" />
 
 
     <FrameLayout
@@ -28,46 +35,44 @@
         android:fitsSystemWindows="true"
         android:background="@android:color/black"
         android:layout_width="match_parent"
-        android:layout_height="550dp">
+        android:layout_height="match_parent">
 
     </FrameLayout>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_alignBottom="@+id/dim"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.991"
-            app:srcCompat="@android:drawable/ic_dialog_email">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_alignBottom="@+id/dim"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/navBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.991"
+        app:srcCompat="@android:drawable/ic_dialog_email">
 
-            <TextView
-                android:id="@+id/songname_textview_crd"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Maku Maku"
-                android:textSize="25sp" />
-
-
-            <ImageButton
-                android:id="@+id/playButton_crd"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_gravity="end"
-                android:layout_marginRight="65dp"
-                android:src="@android:drawable/ic_media_play" />
+        <TextView
+            android:id="@+id/songname_textview_crd"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Maku Maku"
+            android:textSize="25sp" />
 
 
-        </androidx.cardview.widget.CardView>
+        <ImageButton
+            android:id="@+id/playButton_crd"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="65dp"
+            android:src="@android:drawable/ic_media_play" />
 
-    <include layout="@layout/content_main" />
 
+    </androidx.cardview.widget.CardView>
 
+    <include layout="@layout/content_main" /> 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
