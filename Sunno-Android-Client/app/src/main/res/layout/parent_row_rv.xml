@@ -16,14 +16,15 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/text_title_rv_item"
             android:layout_width="match_parent"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="Item name"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:gravity="center"
+            android:text="Item name"
             android:textColor="@android:color/white"
-            android:layout_height="wrap_content"/>
+            android:textSize="18sp"
+            android:textStyle="bold" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/childRV"
             android:layout_width="match_parent"

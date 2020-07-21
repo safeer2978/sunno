@@ -25,24 +25,37 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        context=getActivity();
         view=inflater.inflate(R.layout.fragment_home,container,false);
 
-        itemsArrayList=new ArrayList<>();
+
         recyclerView=view.findViewById(R.id.parent_RV);
+
+
+
+
+
+
+        return view;
+
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        itemsArrayList=new ArrayList<>();
         layoutManager=new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         adapter= new ParentRecyclerAdapter(itemsArrayList,context);
-        recyclerView.setAdapter(adapter);
 
         String [] items= { "abc","def","ghi","jkl","mno","pqr"};
         for(int i=0;i<items.length;i++){
             itemsArrayList.add(items[i]);
         }
         adapter.notifyDataSetChanged();
-
-
-        return inflater.inflate(R.layout.fragment_home,container,false);
-
+        recyclerView.setAdapter(adapter);
     }
 }

@@ -16,7 +16,7 @@ public class ParentRecyclerAdapter extends RecyclerView.Adapter<ParentRecyclerAd
 
     private ArrayList<String> parentArrayList;
     Context context;
-    private ArrayList<String> namesArrayList;
+    private ArrayList<String> namesArrayList = new ArrayList<>();
 
     public ParentRecyclerAdapter(ArrayList<String> parentArrayList, Context context) {
         this.parentArrayList = parentArrayList;
@@ -46,7 +46,6 @@ public class ParentRecyclerAdapter extends RecyclerView.Adapter<ParentRecyclerAd
         ChildRecyclerAdapter childRecyclerAdapter=new ChildRecyclerAdapter(namesArrayList);
         holder.childRV.setAdapter(childRecyclerAdapter);
         childRecyclerAdapter.notifyDataSetChanged();
-
     }
 
     @Override
@@ -59,7 +58,7 @@ public class ParentRecyclerAdapter extends RecyclerView.Adapter<ParentRecyclerAd
         RecyclerView childRV;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            item_name=itemView.findViewById(R.id.nameText_aka_dayText);
+            item_name=itemView.findViewById(R.id.text_title_rv_item);
             childRV=itemView.findViewById(R.id.childRV);
         }
     }
