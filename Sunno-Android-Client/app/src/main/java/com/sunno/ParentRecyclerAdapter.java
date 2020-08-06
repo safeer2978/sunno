@@ -24,9 +24,10 @@ public class ParentRecyclerAdapter extends RecyclerView.Adapter<ParentRecyclerAd
     Context context;
     private ArrayList<String> namesArrayList = new ArrayList<>();
 
-    public ParentRecyclerAdapter(ArrayList<String> parentArrayList, Context context) {
+    public ParentRecyclerAdapter(ArrayList<String> parentArrayList, Context context, ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener) {
         this.parentArrayList = parentArrayList;
         this.context = context;
+        this.onCategoryClickListener = onCategoryClickListener;
     }
 
     @NonNull

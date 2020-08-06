@@ -22,6 +22,12 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private View view;
     private ArrayList<String> itemsArrayList;
+    ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener;
+
+    HomeFragment(ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener){
+        this.onCategoryClickListener = onCategoryClickListener;
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -41,7 +47,7 @@ public class HomeFragment extends Fragment {
         layoutManager=new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter= new ParentRecyclerAdapter(itemsArrayList,context);
+        adapter= new ParentRecyclerAdapter(itemsArrayList,context, onCategoryClickListener);
 
         String [] items= { "abc","def","ghi","jkl","mno","pqr"};
         for(int i=0;i<items.length;i++){

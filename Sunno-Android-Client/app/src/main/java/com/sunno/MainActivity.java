@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements ChildRecyclerAdap
                     Fragment selectedFragment = null;
                      switch (item.getItemId() ){
                          case R.id.nav_home:
-                             selectedFragment=new HomeFragment();
+                             selectedFragment=new HomeFragment(MainActivity.this);
                              break;
                          case R.id.nav_favorites:
                              selectedFragment=new FavFragment();
@@ -219,9 +219,11 @@ public class MainActivity extends AppCompatActivity implements ChildRecyclerAdap
     @Override
     public void onCategoryClick() {
         Fragment fragment=new ListofMusicFragment();
-        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentManager fragmentManager=this.getSupportFragmentManager();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container,fragment);
+        transaction.commit();
+
         Toast.makeText(this, "Ho gaya na select", Toast.LENGTH_SHORT).show();
     }
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,12 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         holder.name.setText(innerList.get(position));
+        holder.child_rv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mOnCategoryClickListener.onCategoryClick();
+            }
+        });
 
     }
 
@@ -48,11 +55,13 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView name;
+        LinearLayout child_rv;
         OnCategoryClickListener onCategoryClickListener;
         public MyViewHolder(@NonNull View itemView,OnCategoryClickListener onCategoryClickListener) {
             super(itemView);
             name=itemView.findViewById(R.id.nameText_aka_dayText);
             this.onCategoryClickListener=onCategoryClickListener;
+            this.child_rv = itemView.findViewById(R.id.child_rv_item);
 
             itemView.setOnClickListener(this);
 
