@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +28,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements ChildRecyclerAdapter.OnCategoryClickListener  {
 
     private MediaPlayer mediaPlayer;
     private SlideUp slideUp;
@@ -191,11 +193,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-//                    if(item.getItemId()==R.id.nav_home){
-//
-//                        fragmentContainter.setVisibility(View.GONE);
-//                    }
-
                     Fragment selectedFragment = null;
                      switch (item.getItemId() ){
                          case R.id.nav_home:
@@ -220,9 +217,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     @Override
-    public void onClick(View v) {
+    public void onCategoryClick() {
+        Fragment fragment=new ListofMusicFragment();
+        FragmentManager fragmentManager=getSupportFragmentManager();
+        FragmentTransaction transaction=fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container,fragment);
+        Toast.makeText(this, "Ho gaya na select", Toast.LENGTH_SHORT).show();
     }
-
 
 @Override
 protected void onDestroy() {
@@ -233,4 +234,5 @@ protected void onDestroy() {
     }
 
     }
+
 }

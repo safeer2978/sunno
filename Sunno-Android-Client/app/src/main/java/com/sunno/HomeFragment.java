@@ -27,15 +27,7 @@ public class HomeFragment extends Fragment {
 
         context=getActivity();
         view=inflater.inflate(R.layout.fragment_home,container,false);
-
-
         recyclerView=view.findViewById(R.id.parent_RV);
-
-
-
-
-
-
         return view;
 
     }

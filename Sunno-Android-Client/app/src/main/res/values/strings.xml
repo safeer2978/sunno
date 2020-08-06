@@ -7,4 +7,6 @@
     <string name="favorite">Favorite</string>
     <string name="search">Search</string>
     <string name="profile">Profile</string>
+    <string name="profile_fragment">Profile Fragment</string>
+    <string name="search_fragment">Search Fragment</string>
 </resources>

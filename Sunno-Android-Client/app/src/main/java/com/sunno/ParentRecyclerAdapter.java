@@ -1,20 +1,26 @@
 package com.sunno;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class ParentRecyclerAdapter extends RecyclerView.Adapter<ParentRecyclerAdapter.MyViewHolder> {
+public class ParentRecyclerAdapter extends RecyclerView.Adapter<ParentRecyclerAdapter.MyViewHolder>{
 
     private ArrayList<String> parentArrayList;
+    private ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener;
     Context context;
     private ArrayList<String> namesArrayList = new ArrayList<>();
 
@@ -43,7 +49,7 @@ public class ParentRecyclerAdapter extends RecyclerView.Adapter<ParentRecyclerAd
         for (int i=0;i<names.length;i++){
             namesArrayList.add(names[i]);
         }
-        ChildRecyclerAdapter childRecyclerAdapter=new ChildRecyclerAdapter(namesArrayList);
+        ChildRecyclerAdapter childRecyclerAdapter=new ChildRecyclerAdapter(namesArrayList,context,onCategoryClickListener);
         holder.childRV.setAdapter(childRecyclerAdapter);
         childRecyclerAdapter.notifyDataSetChanged();
     }
@@ -52,6 +58,7 @@ public class ParentRecyclerAdapter extends RecyclerView.Adapter<ParentRecyclerAd
     public int getItemCount() {
         return parentArrayList.size();
     }
+
 
     public static class MyViewHolder extends  RecyclerView.ViewHolder {
         TextView item_name;
