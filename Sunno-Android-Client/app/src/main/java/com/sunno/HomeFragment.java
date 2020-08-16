@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
     @Nullable
@@ -47,7 +48,28 @@ public class HomeFragment extends Fragment {
         layoutManager=new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter= new ParentRecyclerAdapter(itemsArrayList,context, onCategoryClickListener);
+        List<OuterListObject> outerListObjectList = new ArrayList<>();
+
+        OuterListObject object1 = new OuterListObject("Alternative");
+        List<InnerListObject> innerList = new ArrayList<>();
+        String [] names={"madhul","Safeer","Daksh","Ritvik","Daryl","Shreyam","Pinsu"};
+        for(String name: names){
+            innerList.add(new InnerListObject(name, 1));
+        }
+        object1.setInnerListObjectList(innerList);
+        outerListObjectList.add(object1);
+
+        innerList = new ArrayList<>();
+        OuterListObject object2 = new OuterListObject("EDM");
+        String [] names2={"mal","Sar","Dsh","Riik","Dyl","Sham","Psu"};
+        for(String name: names2){
+            innerList.add(new InnerListObject(name, 2));
+        }
+        object2.setInnerListObjectList(innerList);
+        outerListObjectList.add(object2);
+
+
+        adapter= new ParentRecyclerAdapter(outerListObjectList,context, onCategoryClickListener);
 
         String [] items= { "abc","def","ghi","jkl","mno","pqr"};
         for(int i=0;i<items.length;i++){

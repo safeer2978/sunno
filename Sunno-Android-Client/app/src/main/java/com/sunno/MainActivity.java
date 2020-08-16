@@ -217,14 +217,26 @@ public class MainActivity extends AppCompatActivity implements ChildRecyclerAdap
 
 
     @Override
-    public void onCategoryClick() {
-        Fragment fragment=new ListofMusicFragment();
+    public void onCategoryClick(int type) {
+
+        Fragment fragment;
+        switch (type){
+            case 1:
+                fragment =new ListofMusicFragment();
+                break;
+            case 2:
+                fragment =new ProfileFragment();
+                break;
+            default:
+                fragment=new ListofMusicFragment();
+        }
+
         FragmentManager fragmentManager=this.getSupportFragmentManager();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container,fragment);
         transaction.commit();
 
-        Toast.makeText(this, "Ho gaya na select", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Ho gaya na select"+type+"::"+fragment.getId(), Toast.LENGTH_SHORT).show();
     }
 
 @Override

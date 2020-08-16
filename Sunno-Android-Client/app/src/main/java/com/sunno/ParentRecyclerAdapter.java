@@ -16,16 +16,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ParentRecyclerAdapter extends RecyclerView.Adapter<ParentRecyclerAdapter.MyViewHolder>{
 
-    private ArrayList<String> parentArrayList;
     private ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener;
     Context context;
-    private ArrayList<String> namesArrayList = new ArrayList<>();
+    private List<OuterListObject> outerListObjects;
 
-    public ParentRecyclerAdapter(ArrayList<String> parentArrayList, Context context, ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener) {
-        this.parentArrayList = parentArrayList;
+    public ParentRecyclerAdapter(List<OuterListObject> parentArrayList, Context context, ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener) {
+        this.outerListObjects = parentArrayList;
         this.context = context;
         this.onCategoryClickListener = onCategoryClickListener;
     }
@@ -41,23 +41,21 @@ public class ParentRecyclerAdapter extends RecyclerView.Adapter<ParentRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.item_name.setText(parentArrayList.get(position));
+
+        OuterListObject object = outerListObjects.get(position);
+        holder.item_name.setText(object.getTitle());
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
         holder.childRV.setLayoutManager(layoutManager);
         holder.childRV.setHasFixedSize(true);
-        namesArrayList.clear();
-        String [] names={"madhul","Safeer","Daksh","Ritvik","Daryl","Shreyam","Pinsu"};
-        for (int i=0;i<names.length;i++){
-            namesArrayList.add(names[i]);
-        }
-        ChildRecyclerAdapter childRecyclerAdapter=new ChildRecyclerAdapter(namesArrayList,context,onCategoryClickListener);
+
+        ChildRecyclerAdapter childRecyclerAdapter=new ChildRecyclerAdapter(outerListObjects.get(position).getInnerListObjectList(),context,onCategoryClickListener);
         holder.childRV.setAdapter(childRecyclerAdapter);
         childRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return parentArrayList.size();
+        return outerListObjects.size();
     }
 
 

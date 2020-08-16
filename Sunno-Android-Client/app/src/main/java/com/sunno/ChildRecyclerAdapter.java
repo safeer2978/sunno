@@ -13,14 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdapter.MyViewHolder> {
 
-    private ArrayList<String> innerList;
+    private List<InnerListObject> innerList;
     private OnCategoryClickListener mOnCategoryClickListener;
     private Context context;
 
-    public ChildRecyclerAdapter(ArrayList<String> innerList, Context context,OnCategoryClickListener onCategoryClickListener) {
+    public ChildRecyclerAdapter(List<InnerListObject> innerList, Context context, OnCategoryClickListener onCategoryClickListener) {
         this.innerList = innerList;
         this.context = context;
         this.mOnCategoryClickListener=onCategoryClickListener;
@@ -36,12 +37,12 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
-        holder.name.setText(innerList.get(position));
+        final InnerListObject object = innerList.get(position);
+        holder.name.setText(object.getTitle());
         holder.child_rv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mOnCategoryClickListener.onCategoryClick();
+                mOnCategoryClickListener.onCategoryClick(object.getType());
             }
         });
 
@@ -52,7 +53,7 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
         return innerList.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView name;
         LinearLayout child_rv;
@@ -63,17 +64,10 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
             this.onCategoryClickListener=onCategoryClickListener;
             this.child_rv = itemView.findViewById(R.id.child_rv_item);
 
-            itemView.setOnClickListener(this);
-
-        }
-
-        @Override
-        public void onClick(View v) {
-        onCategoryClickListener.onCategoryClick();
         }
     }
 
     public interface OnCategoryClickListener{
-        void onCategoryClick();
+        void onCategoryClick(int type);
     }
 }
