@@ -63,7 +63,6 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
             name=itemView.findViewById(R.id.nameText_aka_dayText);
             this.onCategoryClickListener=onCategoryClickListener;
             this.child_rv = itemView.findViewById(R.id.child_rv_item);
-
         }
     }
 
