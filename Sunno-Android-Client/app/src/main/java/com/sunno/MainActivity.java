@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.sunno.URLConstants.*;
+
 public class MainActivity extends AppCompatActivity implements ChildRecyclerAdapter.OnCategoryClickListener  {
 
     private MediaPlayer mediaPlayer;
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements ChildRecyclerAdap
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                int duration=mp.getDuration();
+                //int duration=mp.getDuration();
                 //Toast.makeText(MainActivity.this, String.valueOf((duration/1000)/60), Toast.LENGTH_SHORT).show();
             }
         });
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements ChildRecyclerAdap
             public void onPrepared(final MediaPlayer mp) {
                 //String Duration= String.valueOf(mp.getDuration());
                 //endText.setText(Duration);
-                seekBar_mp.setMax(mp.getDuration());
+                //seekBar_mp.setMax(mp.getDuration());
                 playBtn_crd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -218,7 +220,6 @@ public class MainActivity extends AppCompatActivity implements ChildRecyclerAdap
 
     @Override
     public void onCategoryClick(int type) {
-
         Fragment fragment;
         switch (type){
             case 1:
