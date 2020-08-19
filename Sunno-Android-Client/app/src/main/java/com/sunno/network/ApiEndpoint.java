@@ -5,5 +5,5 @@ import retrofit2.http.GET;
 
 public interface ApiEndpoint {
     @GET("metadata")
-    Call<MetadataResponse> getMetaData();
+    Call<MetaDataModel> getMetaData();
 }

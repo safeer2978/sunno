@@ -10,7 +10,7 @@ import com.sunno.Model.PlaylistModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MetadataResponse {
+public class MetaDataModel {
 
     public List<Genre> getGenre() {
         return genre;
