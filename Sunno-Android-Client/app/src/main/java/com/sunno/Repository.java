@@ -3,12 +3,10 @@ package com.sunno;
 import android.app.Application;
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
-
 import com.sunno.Model.Genre;
 import com.sunno.network.ApiEndpoint;
 import com.sunno.network.ApiService;
-import com.sunno.network.MetaDataModel;
+import com.sunno.network.MetadataResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,21 +34,21 @@ public class Repository {
     Repository(Application application) {
         api = ApiService.getRetrofitClient().create(ApiEndpoint.class);
         api.getMetaData()
-                .enqueue(new Callback<MetaDataModel>() {
+                .enqueue(new Callback<MetadataResponse>() {
                     @Override
-                    public void onResponse(Call<MetaDataModel> call, Response<MetaDataModel> response) {
+                    public void onResponse(Call<MetadataResponse> call, Response<MetadataResponse> response) {
                         if (!response.isSuccessful()) {
                             Log.d("HomeFragment2", "onFailure: " + response.code());
                             return;
                         }
-                        MetaDataModel metaDataModelFromApi = response.body();
+                        MetadataResponse metaDataModelFromApi = response.body();
 
                         System.out.println(metaDataModelFromApi);
                         genreListFromMApi = metaDataModelFromApi.getGenre();
                     }
 
                     @Override
-                    public void onFailure(Call<MetaDataModel> call, Throwable t) {
+                    public void onFailure(Call<MetadataResponse> call, Throwable t) {
 
                     }
                 });
