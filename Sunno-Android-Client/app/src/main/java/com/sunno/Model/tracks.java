@@ -1,21 +1,23 @@
 package com.sunno.Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class TrackModel {
+public class tracks {
     private int id;
     private String title;
-    private ArrayList<AlbumModel> album;
+    private List<AlbumModel> album;
     private String combination;
 
-    public TrackModel(int id, String title, ArrayList<AlbumModel> album, String combination) {
+
+    public tracks(int id, String title, ArrayList<AlbumModel> album, String combination) {
         this.id = id;
         this.title = title;
         this.album = album;
         this.combination = combination;
     }
 
-    public TrackModel() {
+    public tracks() {
     }
 
     public int getId() {
@@ -34,11 +36,11 @@ public class TrackModel {
         this.title = title;
     }
 
-    public ArrayList<AlbumModel> getAlbum() {
+    public List<AlbumModel> getAlbum() {
         return album;
     }
 
-    public void setAlbum(ArrayList<AlbumModel> album) {
+    public void setAlbum(List<AlbumModel> album) {
         this.album = album;
     }
 

@@ -1,18 +1,19 @@
-package com.sunno;
+package com.sunno.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.sunno.InnerListObject;
+import com.sunno.R;
+
 import java.util.List;
 
 public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdapter.MyViewHolder> {
@@ -56,6 +57,7 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView name;
+        private ImageView imageView;
         LinearLayout child_rv;
         OnCategoryClickListener onCategoryClickListener;
         public MyViewHolder(@NonNull View itemView,OnCategoryClickListener onCategoryClickListener) {

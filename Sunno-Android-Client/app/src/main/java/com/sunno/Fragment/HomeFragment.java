@@ -1,8 +1,7 @@
-package com.sunno;
+package com.sunno.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,20 +13,19 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sunno.Adapter.ChildRecyclerAdapter;
+import com.sunno.HomeFragmentViewModel;
+import com.sunno.InnerListObject;
+import com.sunno.Model.AlbumModel;
 import com.sunno.Model.ArtistModel;
 import com.sunno.Model.Genre;
-import com.sunno.network.ApiEndpoint;
-import com.sunno.network.MetaDataModel;
-import com.sunno.network.ApiService;
+import com.sunno.OuterListObject;
+import com.sunno.Adapter.ParentRecyclerAdapter;
+import com.sunno.R;
+import com.sunno.URLConstants;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
 
@@ -44,7 +42,7 @@ public class HomeFragment extends Fragment {
     private List<ArtistModel> artistListFromMApi;
     ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener;
 
-    HomeFragment(ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener){
+    public HomeFragment(ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener){
         this.onCategoryClickListener = onCategoryClickListener;
     }
 
@@ -97,19 +95,55 @@ public class HomeFragment extends Fragment {
 
         List<OuterListObject> outerListObjectList = new ArrayList<>();
 
-
-
-
         OuterListObject object1 = new OuterListObject("Genre");
         List<Genre> innerListGenre=viewModel.getGenreList();
 
-        List<InnerListObject> innerList = new ArrayList<>();
+        List<InnerListObject> innerList1 = new ArrayList<>();
 
         for(Genre genre: innerListGenre){
-            innerList.add(new InnerListObject(genre.getName(),genre.getImg_url(),URLConstants.GENRE_FRAGMENT_ID));
+            innerList1.add(new InnerListObject(genre.getName(),genre.getImg_url(), URLConstants.GENRE_FRAGMENT_ID));
         }
-        object1.setInnerListObjectList(innerList);
+        object1.setInnerListObjectList(innerList1);
         outerListObjectList.add(object1);
+
+        // Adding Album
+
+        OuterListObject object2 = new OuterListObject("Album");
+        List<AlbumModel> innerListAlbum=viewModel.getAlbumList();
+
+        List<InnerListObject> innerList2 = new ArrayList<>();
+
+        for(AlbumModel albumModel: innerListAlbum){
+            innerList2.add(new InnerListObject(albumModel.getName(),albumModel.getImg_url(), URLConstants.ALBUM_FRAGMENT_ID));
+        }
+        object2.setInnerListObjectList(innerList2);
+        outerListObjectList.add(object2);
+
+
+        //adding artist
+
+        OuterListObject object3 = new OuterListObject("Artists");
+        List<ArtistModel> innerListArtist=viewModel.getArtistList();
+
+        List<InnerListObject> innerList3 = new ArrayList<>();
+
+        for(ArtistModel artistModel:innerListArtist){
+            innerList3.add(new InnerListObject(artistModel.getName(),artistModel.getImg_url(), URLConstants.ARTIST_FRAGMENT_ID));
+        }
+        object3.setInnerListObjectList(innerList3);
+        outerListObjectList.add(object3);
+
+//        OuterListObject object2=new OuterListObject("Artist");
+//        List<ArtistModel> innerListArtist=viewModel.getArtistList();
+//
+//        List<InnerListObject> innerList2 = new ArrayList<>();
+//
+//        for(ArtistModel artist:innerListArtist){
+//            innerList2.add(new InnerListObject(artist.getName(),artist.getImg_url(),URLConstants.ARTIST_FRAGMENT_ID));
+//        }
+//
+//        object2.setInnerListObjectList(innerList2);
+//        outerListObjectList.add(object2);
 
         /*List<ArtistModel> innerListArtists=artistListFromMApi;
         innerList = new ArrayList<>();

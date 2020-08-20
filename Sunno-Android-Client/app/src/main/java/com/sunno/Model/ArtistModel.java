@@ -1,20 +1,21 @@
 package com.sunno.Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ArtistModel {
     private int id;
     private String name;
     private String img_url;
-    private ArrayList<AlbumModel> albums;
-    private ArrayList<TrackModel> tracks;
+   // private ArrayList<AlbumModel> albums;
+    //private List<com.sunno.Model.tracks> tracks;
 
-    public ArtistModel(int id, String name, String img_url, ArrayList<AlbumModel> albums, ArrayList<TrackModel> tracks) {
+    public ArtistModel(int id, String name, String img_url, ArrayList<AlbumModel> albums, ArrayList<com.sunno.Model.tracks> tracks) {
         this.id = id;
         this.name = name;
         this.img_url = img_url;
-        this.albums = albums;
-        this.tracks = tracks;
+     //   this.albums = albums;
+      //  this.tracks = tracks;
     }
 
     public ArtistModel() {
@@ -44,21 +45,23 @@ public class ArtistModel {
         this.img_url = img_url;
     }
 
-    public ArrayList<AlbumModel> getAlbums() {
-        return albums;
-    }
 
-    public void setAlbums(ArrayList<AlbumModel> albums) {
-        this.albums = albums;
-    }
+//    public ArrayList<AlbumModel> getAlbums() {
+//        return albums;
+//    }
 
-    public ArrayList<TrackModel> getTracks() {
-        return tracks;
-    }
+//    public void setAlbums(ArrayList<AlbumModel> albums) {
+//        this.albums = albums;
+//    }
 
-    public void setTracks(ArrayList<TrackModel> tracks) {
-        this.tracks = tracks;
-    }
+//    public List<com.sunno.Model.tracks> getTracks() {
+//        return tracks;
+//    }
+//
+//    public void setTracks(List<com.sunno.Model.tracks> tracks) {
+//        this.tracks = tracks;
+//    }
+
 }
 
 /*          "id": 1,

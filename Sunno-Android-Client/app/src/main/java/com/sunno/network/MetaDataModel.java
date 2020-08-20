@@ -12,6 +12,22 @@ import java.util.List;
 
 public class MetaDataModel {
 
+    public List<ArtistModel> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(List<ArtistModel> artists) {
+        this.artists = artists;
+    }
+
+    public List<AlbumModel> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(List<AlbumModel> albums) {
+        this.albums = albums;
+    }
+
     public List<Genre> getGenre() {
         return genre;
     }
@@ -23,5 +39,9 @@ public class MetaDataModel {
     @SerializedName("genre")
     @Expose
     private List<Genre> genre;
+
+    private List<ArtistModel> artists;
+
+    private List<AlbumModel> albums;
 
 }

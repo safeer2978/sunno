@@ -28,13 +28,7 @@ public class AlbumModel {
         this.img_url = img_url;
     }
 
-    public List<Genre> getGenre() {
-        return genre;
-    }
 
-    public void setGenre(List<Genre> genre) {
-        this.genre = genre;
-    }
 
     public String getCombination() {
         return Combination;
@@ -47,8 +41,27 @@ public class AlbumModel {
     private int id;
     private String name;
     private String img_url;
-    private List<Genre> genre;
+    private Genre genre;
     private String Combination;
+
+    public AlbumModel(int id, String name, String img_url, Genre genre, String combination) {
+        this.id = id;
+        this.name = name;
+        this.img_url = img_url;
+        this.genre = genre;
+        Combination = combination;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public AlbumModel() {
+    }
 }
 
 /*

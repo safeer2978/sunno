@@ -5,6 +5,8 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.sunno.Model.AlbumModel;
+import com.sunno.Model.ArtistModel;
 import com.sunno.Model.Genre;
 import com.sunno.network.ApiEndpoint;
 import com.sunno.network.ApiService;
@@ -32,6 +34,8 @@ public class Repository {
     }
 
     List<Genre> genreListFromMApi = new ArrayList<>();
+    List<ArtistModel> artistListFromMApi = new ArrayList<>();
+    List<AlbumModel> albumListFromMApi = new ArrayList<>();
 
     Repository(Application application) {
         api = ApiService.getRetrofitClient().create(ApiEndpoint.class);
@@ -46,7 +50,12 @@ public class Repository {
                         MetaDataModel metaDataModelFromApi = response.body();
 
                         System.out.println(metaDataModelFromApi);
+                        assert metaDataModelFromApi != null;
                         genreListFromMApi = metaDataModelFromApi.getGenre();
+                        artistListFromMApi=metaDataModelFromApi.getArtists();
+                        albumListFromMApi=metaDataModelFromApi.getAlbums();
+                        Log.d("Repository", "onResponse: "+artistListFromMApi);
+
                     }
 
                     @Override
@@ -54,12 +63,18 @@ public class Repository {
 
                     }
                 });
-
     }
-
 
     public List<Genre> getGenreList(){
         return genreListFromMApi;
+    }
+
+    public List<AlbumModel> getAlbumList(){
+        return albumListFromMApi;
+    }
+
+    public List<ArtistModel> getArtistsList(){
+        return artistListFromMApi;
     }
 
 }
