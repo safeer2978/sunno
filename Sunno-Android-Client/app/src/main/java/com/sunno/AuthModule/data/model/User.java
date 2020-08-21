@@ -31,10 +31,6 @@ public class User {
         return expiresInMsec;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -55,7 +51,6 @@ public class User {
         this.expiresInMsec = expiresInMsec;
     }
 
-    public String displayName;
 
     @NonNull
     @PrimaryKey
@@ -68,7 +63,7 @@ public class User {
 
 
     public User(@NonNull String email, String accessToken, String refreshToken, String tokenType, Long expiresInMsec) {
-        this.displayName = email;
+
         this.email = email;
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
@@ -76,8 +71,4 @@ public class User {
         this.expiresInMsec = expiresInMsec;
     }
 
-
-    public String getDisplayName() {
-        return displayName;
-    }
 }
