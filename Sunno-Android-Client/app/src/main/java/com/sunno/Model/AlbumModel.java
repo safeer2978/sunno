@@ -16,6 +16,9 @@ public class AlbumModel {
         return name;
     }
 
+    public AlbumModel() {
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -28,13 +31,6 @@ public class AlbumModel {
         this.img_url = img_url;
     }
 
-    public List<Genre> getGenre() {
-        return genre;
-    }
-
-    public void setGenre(List<Genre> genre) {
-        this.genre = genre;
-    }
 
     public String getCombination() {
         return Combination;
@@ -47,7 +43,16 @@ public class AlbumModel {
     private int id;
     private String name;
     private String img_url;
-    private List<Genre> genre;
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    private Genre genre;
     private String Combination;
 }
 

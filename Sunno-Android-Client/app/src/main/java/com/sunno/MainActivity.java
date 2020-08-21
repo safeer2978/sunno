@@ -250,4 +250,13 @@ protected void onDestroy() {
 
     }
 
+    boolean flag = true;
+    @Override
+    public void onBackPressed() {
+        if(flag) {
+            Toast.makeText(this, "Are you sure you at to quit? Press Back Again", Toast.LENGTH_SHORT).show();
+            flag = false;
+        }else
+            super.onBackPressed();
+    }
 }

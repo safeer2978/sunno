@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sunno.AuthModule.ui.login.LoginFragment;
 import com.sunno.AuthModule.ui.signup.SignUpFragment;
@@ -25,7 +26,10 @@ public class StartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start);
         frameLayout = findViewById(R.id.start_frame);
         change = findViewById(R.id.change);
-
+        FragmentManager fragmentManager=this.getSupportFragmentManager();
+        FragmentTransaction transaction=fragmentManager.beginTransaction();
+        transaction.replace(R.id.start_frame,new LoginFragment());
+        transaction.commit();
     }
 
 
@@ -47,4 +51,13 @@ public class StartActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    boolean flag = true;
+    @Override
+    public void onBackPressed() {
+        if(flag) {
+            Toast.makeText(this, "Are you sure you at to quit? Press Back Again", Toast.LENGTH_SHORT).show();
+            flag = false;
+        }else
+            super.onBackPressed();
+    }
 }

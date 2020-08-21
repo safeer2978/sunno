@@ -29,7 +29,7 @@ public class LoginDataSource {
 
     private static final String TAG = "LOGIN_DATA_STORE";
 
-    LoginEndpoints api;
+    static LoginEndpoints api;
 
     LoginDao dao;
 
@@ -39,7 +39,7 @@ public class LoginDataSource {
         dao = LoginDatabase.getDatabase(application).wordDao();
     }
 
-    public Result login(final String username, String password) {
+    public Result<User> login(final String username, String password) {
 
         try {
             final LoginRequest request = new LoginRequest(username, password);
@@ -57,41 +57,36 @@ public class LoginDataSource {
                                 loginResponse.getTokenType(),
                                 loginResponse.getExpiresInMsec());
                         System.out.println(user.tokenType);
-                        Thread t =
-                                new Thread() {
-                                    @Override
-                                    public void run() {
-                                        dao.insertUser(user);
-                                    }
-                                };
-                        t.start();
+                        dao.dropTable(user);
+                        dao.insertUser(user);
+                        System.out.println("Reached Here end of dao");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
-
+                   System.out.println("Reached Failure Here");
                 }
             });
 
 
+            System.out.println("Reached Here");
             return new Result.Success<User>(dao.getUser());
         } catch (Exception e) {
             return new Result.Error(new Exception(""));
         }
     }
-
-    public Boolean signUp(SignUpRequest signUpRequest){
+    static boolean flag;
+    public static Boolean signUp(SignUpRequest signUpRequest){
         try {
 
-            final String[] message = new String[2];
             api.onSignUp(signUpRequest).enqueue(new Callback<SignUpResponse>() {
                 @Override
                 public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                    Log.i(TAG, "API connected");
-                    SignUpResponse signUpResponse = response.body();
-                    message[0] = signUpResponse.getMessage();
-                    message[1] = signUpResponse.getStatus().toString();
+                    Log.i(TAG, "API connected:"+response.code());
+
+                    LoginDataSource.flag=response.code()==201;
+                    System.out.println("1 status : " +flag);
                 }
 
                 @Override
@@ -99,9 +94,11 @@ public class LoginDataSource {
 
                 }
             });
-            System.out.println(message[0]);
-            return message[1].equals("true");
+
+            System.out.println("status : " +flag);
+            return flag;
         } catch (Exception e) {
+            System.out.println("status : EXCEPTION");
             return false;
         }
     }

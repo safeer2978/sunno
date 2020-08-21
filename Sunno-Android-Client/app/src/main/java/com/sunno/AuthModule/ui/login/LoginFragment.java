@@ -26,6 +26,8 @@ import com.sunno.AuthModule.ui.StartActivity;
 import com.sunno.MainActivity;
 import com.sunno.R;
 
+import java.util.Objects;
+
 public class LoginFragment extends Fragment {
 
     private LoginViewModel loginViewModel;
@@ -129,6 +131,7 @@ public class LoginFragment extends Fragment {
             Toast.makeText(getContext().getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
 
             startActivity(new Intent(getActivity(), MainActivity.class));
+            Objects.requireNonNull(getActivity()).finish();
         }
     }
 

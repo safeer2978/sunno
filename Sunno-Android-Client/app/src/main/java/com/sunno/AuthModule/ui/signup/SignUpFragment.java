@@ -47,15 +47,9 @@ public class SignUpFragment extends Fragment {
         final EditText genderEditText = view.findViewById(R.id.sign_gender);
         Button signUpButton  = view.findViewById(R.id.sign_UP_btn);
 
-        mViewModel = ViewModelProviders.of(this, new SignUpViewModelFactory()).get(SignUpViewModel.class);
+        mViewModel = ViewModelProviders.of(this, new SignUpViewModelFactory(this.getActivity().getApplication())).get(SignUpViewModel.class);
 
-        final SignUpRequest request = new SignUpRequest(usernameEditText.getText().toString(),
-                passwordEditText.getText().toString(),
-                phoneEditText.getText().toString(),
-                firstNameEditText.getText().toString(),
-                lastNameEditText.getText().toString(),
-                Integer.valueOf(ageEditText.getText().toString()),
-                genderEditText.getText().toString());
+
 
 
 
@@ -64,6 +58,13 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //loadingProgressBar.setVisibility(View.VISIBLE);
+                final SignUpRequest request = new SignUpRequest(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString(),
+                        phoneEditText.getText().toString(),
+                        firstNameEditText.getText().toString(),
+                        lastNameEditText.getText().toString(),
+                        Integer.valueOf(ageEditText.getText().toString()),
+                        genderEditText.getText().toString());
                 boolean status = mViewModel.signUp(request);
                 Toast.makeText(getContext(), "status: "+status,Toast.LENGTH_LONG).show();
             }

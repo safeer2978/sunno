@@ -6,6 +6,6 @@ public class PlaylistModel {
     private int id;
     private String name;
     private int user_id;
-    private ArrayList<TrackModel> tracks;
+    private ArrayList<com.sunno.Model.tracks> tracks;
 
 }

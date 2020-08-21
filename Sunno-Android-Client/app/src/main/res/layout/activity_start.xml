@@ -19,7 +19,7 @@
         android:id="@+id/change"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="SignUp"
+        android:text="sign up"
         android:onClick="OnClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

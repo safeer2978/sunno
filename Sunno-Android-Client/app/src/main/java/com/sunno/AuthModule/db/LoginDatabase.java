@@ -23,6 +23,7 @@ public abstract class LoginDatabase extends RoomDatabase{
                 if(INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             LoginDatabase.class, "login_database")
+                            .allowMainThreadQueries()
                             .build();
                 }
             }
