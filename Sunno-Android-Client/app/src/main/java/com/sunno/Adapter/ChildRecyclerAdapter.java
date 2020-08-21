@@ -1,6 +1,7 @@
 package com.sunno.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
 import com.sunno.InnerListObject;
 import com.sunno.R;
 
@@ -40,6 +42,21 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final InnerListObject object = innerList.get(position);
         holder.name.setText(object.getTitle());
+        Log.d("ChildRecycler", "onBindViewHolder: "+object.getImg_url()+" "+object.getTitle());
+        if(object.getImg_url()!=null){
+            Picasso.get()
+                    .load(object.getImg_url())
+                    .resize(300,300)
+                    .into(holder.imageView);
+        }
+        else{
+            Picasso.get()
+                    .load("https://i.imgur.com/nszu54A.jpg")
+                    .resize(300,300)
+                    .into(holder.imageView);
+
+        }
+
         holder.child_rv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,8 +80,10 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
         public MyViewHolder(@NonNull View itemView,OnCategoryClickListener onCategoryClickListener) {
             super(itemView);
             name=itemView.findViewById(R.id.nameText_aka_dayText);
+            imageView=itemView.findViewById(R.id.image_view);
             this.onCategoryClickListener=onCategoryClickListener;
             this.child_rv = itemView.findViewById(R.id.child_rv_item);
+
         }
     }
 

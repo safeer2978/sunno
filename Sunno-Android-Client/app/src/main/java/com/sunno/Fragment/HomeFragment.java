@@ -65,34 +65,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
 
-        /*Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(URLConstants.VIEW_SERVICE_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiEndpoint apiService=retrofit.create(ApiEndpoint.class);
-
-        Call<MetaDataModel> call=apiService.getMetaData();
-        call.enqueue(new Callback<MetaDataModel>() {
-            @Override
-            public void onResponse(Call<MetaDataModel> call, Response<MetaDataModel> response) {
-                if(!response.isSuccessful()){
-                    Log.d("HomeFragment2", "onFailure: "+response.code());
-                    return;
-                }
-                MetaDataModel metaDataModelFromApi=response.body();
-
-                System.out.println(metaDataModelFromApi);
-                genreListFromMApi=metaDataModelFromApi.getGenre();
-                //artistListFromMApi=metaDataModelFromApi.getArtists();
-            }
-
-            @Override
-            public void onFailure(Call<MetaDataModel> call, Throwable t) {
-                Log.d("HomeFragment1", "onFailure: "+t.getMessage());
-            }
-        });*/
-
         List<OuterListObject> outerListObjectList = new ArrayList<>();
 
         OuterListObject object1 = new OuterListObject("Genre");
@@ -114,7 +86,7 @@ public class HomeFragment extends Fragment {
         List<InnerListObject> innerList2 = new ArrayList<>();
 
         for(AlbumModel albumModel: innerListAlbum){
-            innerList2.add(new InnerListObject(albumModel.getName(),albumModel.getImg_url(), URLConstants.ALBUM_FRAGMENT_ID));
+            innerList2.add(new InnerListObject(albumModel.getName(),albumModel.getImage_url(), URLConstants.ALBUM_FRAGMENT_ID));
         }
         object2.setInnerListObjectList(innerList2);
         outerListObjectList.add(object2);
