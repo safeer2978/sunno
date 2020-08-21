@@ -8,4 +8,5 @@ public class URLConstants {
 
     public static final Integer GENRE_FRAGMENT_ID = 1;
     public static final Integer ARTIST_FRAGMENT_ID = 2;
+    public static final Integer ALBUM_FRAGMENT_ID = 3;
 }

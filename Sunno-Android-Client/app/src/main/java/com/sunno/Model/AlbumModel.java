@@ -4,6 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlbumModel {
+
+    private int id;
+    private String name;
+    private String image_url;
+    private Genre genre;
+    private String Combination;
+
+    public AlbumModel(int id, String name, String image_url, Genre genre, String combination) {
+        this.id = id;
+        this.name = name;
+        this.image_url = image_url;
+        this.genre = genre;
+        Combination = combination;
+    }
+
+    public AlbumModel() {
+    }
+
     public int getId() {
         return id;
     }
@@ -16,33 +34,17 @@ public class AlbumModel {
         return name;
     }
 
-    public AlbumModel() {
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getImg_url() {
-        return img_url;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
-
-
-    public String getCombination() {
-        return Combination;
-    }
-
-    public void setCombination(String combination) {
-        Combination = combination;
-    }
-
-    private int id;
-    private String name;
-    private String img_url;
 
     public Genre getGenre() {
         return genre;
@@ -52,8 +54,13 @@ public class AlbumModel {
         this.genre = genre;
     }
 
-    private Genre genre;
-    private String Combination;
+    public String getCombination() {
+        return Combination;
+    }
+
+    public void setCombination(String combination) {
+        Combination = combination;
+    }
 }
 
 /*

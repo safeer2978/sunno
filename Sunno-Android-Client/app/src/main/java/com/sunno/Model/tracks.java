@@ -1,15 +1,14 @@
 package com.sunno.Model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
-
+import java.util.List;
 
 public class tracks {
     private int id;
     private String title;
-    private ArrayList<AlbumModel> album;
+    private List<AlbumModel> album;
     private String combination;
+
 
     public tracks(int id, String title, ArrayList<AlbumModel> album, String combination) {
         this.id = id;
@@ -37,11 +36,11 @@ public class tracks {
         this.title = title;
     }
 
-    public ArrayList<AlbumModel> getAlbum() {
+    public List<AlbumModel> getAlbum() {
         return album;
     }
 
-    public void setAlbum(ArrayList<AlbumModel> album) {
+    public void setAlbum(List<AlbumModel> album) {
         this.album = album;
     }
 

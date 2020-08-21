@@ -6,8 +6,6 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -23,12 +21,16 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mancj.slideup.SlideUp;
 import com.mancj.slideup.SlideUpBuilder;
+import com.sunno.Adapter.ChildRecyclerAdapter;
+import com.sunno.Fragment.ResponseFragment.AlbumResponseFragment;
+import com.sunno.Fragment.ResponseFragment.ArtistResponseFragment;
+import com.sunno.Fragment.FavFragment;
+import com.sunno.Fragment.HomeFragment;
+import com.sunno.Fragment.ResponseFragment.GenreResponseFragment;
+import com.sunno.Fragment.ProfileFragment;
+import com.sunno.Fragment.SearchFragment;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.sunno.URLConstants.*;
 
 public class MainActivity extends AppCompatActivity implements ChildRecyclerAdapter.OnCategoryClickListener  {
 
@@ -223,21 +225,22 @@ public class MainActivity extends AppCompatActivity implements ChildRecyclerAdap
         Fragment fragment;
         switch (type){
             case 1:
-                fragment =new ListofMusicFragment();
+                fragment =new GenreResponseFragment();
                 break;
             case 2:
-                fragment =new ProfileFragment();
+                fragment =new ArtistResponseFragment();
+                break;
+            case 3:
+                fragment= new AlbumResponseFragment();
                 break;
             default:
-                fragment=new ListofMusicFragment();
+                fragment=new GenreResponseFragment();
         }
 
         FragmentManager fragmentManager=this.getSupportFragmentManager();
         FragmentTransaction transaction=fragmentManager.beginTransaction();
         transaction.replace(R.id.fragment_container,fragment);
         transaction.commit();
-
-        Toast.makeText(this, "Ho gaya na select"+type+"::"+fragment.getId(), Toast.LENGTH_SHORT).show();
     }
 
 @Override
