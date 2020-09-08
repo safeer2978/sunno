@@ -11,8 +11,6 @@ import java.util.concurrent.Future;
 
 @Dao
 public interface LoginDao {
-
-
     @Insert
     long insertUser(User user);
 
