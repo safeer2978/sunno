@@ -7,6 +7,7 @@ import androidx.room.Query;
 
 import com.sunno.AuthModule.data.model.User;
 
+import java.util.List;
 import java.util.concurrent.Future;
 
 @Dao
@@ -18,7 +19,7 @@ public interface LoginDao {
     void dropTable(User user);
 
     @Query("select * from login_database")
-    User getUser();
+    List<User> getUser();
 
 
 }

@@ -56,10 +56,11 @@ public class LoginDataSource {
                                 loginResponse.getRefreshToken(),
                                 loginResponse.getTokenType(),
                                 loginResponse.getExpiresInMsec());
-                        System.out.println(user.tokenType);
+                        System.out.println(user.getAccessToken());
                         dao.dropTable(user);
                         dao.insertUser(user);
                         System.out.println("Reached Here end of dao");
+                        System.out.println(dao.getUser().get(0).getAccessToken()+"OTHER");
                     }
                 }
 
@@ -71,7 +72,7 @@ public class LoginDataSource {
 
 
             System.out.println("Reached Here");
-            return new Result.Success<User>(dao.getUser());
+            return new Result.Success<User>(dao.getUser().get(0));
         } catch (Exception e) {
             return new Result.Error(new Exception(""));
         }
@@ -105,6 +106,6 @@ public class LoginDataSource {
 
 
     public void logout() {
-        dao.dropTable(dao.getUser());
+        dao.dropTable(dao.getUser().get(0));
     }
 }

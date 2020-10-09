@@ -8,17 +8,6 @@
         />
 
     <item
-        android:title="@string/favorite"
-        android:id="@+id/nav_favorites"
-        android:icon="@drawable/ic_baseline_favorite_border_24"
-        />
-
-    <item
-        android:title="@string/search"
-        android:id="@+id/nav_search"
-        android:icon="@drawable/ic_baseline_search_24"
-        />
-    <item
         android:icon="@drawable/ic_baseline_portrait_24"
         android:id="@+id/nav_profile"
         android:title="@string/profile"

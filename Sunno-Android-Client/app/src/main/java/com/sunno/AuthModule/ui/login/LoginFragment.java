@@ -22,8 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sunno.AuthModule.ui.StartActivity;
-import com.sunno.MainActivity;
+import com.sunno.Main.ui.MainActivity;
 import com.sunno.R;
 
 import java.util.Objects;
@@ -67,7 +66,7 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
+        loginViewModel.getLoginResult().observe(getActivity(), new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
                 if (loginResult == null) {
