@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 import com.sunno.Main.Model.Object.InnerListObject;
+import com.sunno.Main.ui.OnCategoryClickListener;
 import com.sunno.R;
 
 import java.util.List;
@@ -77,7 +78,7 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
         private ImageView imageView;
         LinearLayout child_rv;
         OnCategoryClickListener onCategoryClickListener;
-        public MyViewHolder(@NonNull View itemView,OnCategoryClickListener onCategoryClickListener) {
+        public MyViewHolder(@NonNull View itemView, OnCategoryClickListener onCategoryClickListener) {
             super(itemView);
             name=itemView.findViewById(R.id.nameText_aka_dayText);
             imageView=itemView.findViewById(R.id.image_view);
@@ -87,7 +88,5 @@ public class ChildRecyclerAdapter extends RecyclerView.Adapter<ChildRecyclerAdap
         }
     }
 
-    public interface OnCategoryClickListener{
-        void onCategoryClick(int type,List<Object> params);
-    }
+
 }

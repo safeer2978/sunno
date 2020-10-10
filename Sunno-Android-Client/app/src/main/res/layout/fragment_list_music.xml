@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/List_recyclerView"
+        android:id="@+id/genre_fragment_recyclerView"
         android:layout_width="408dp"
         android:layout_height="426dp"
         android:layout_marginBottom="80dp"

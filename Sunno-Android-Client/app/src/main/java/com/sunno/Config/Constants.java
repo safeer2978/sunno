@@ -9,4 +9,6 @@ public class Constants {
     public static final Integer GENRE_FRAGMENT_ID = 1;
     public static final Integer ARTIST_FRAGMENT_ID = 2;
     public static final Integer ALBUM_FRAGMENT_ID = 3;
+
+    public static final Integer TOKEN_REFRESH_TIME = 10;
 }

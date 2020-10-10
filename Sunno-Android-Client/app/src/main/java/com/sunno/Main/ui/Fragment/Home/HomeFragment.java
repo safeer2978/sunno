@@ -21,6 +21,7 @@ import com.sunno.Main.Model.Entities.ArtistModel;
 import com.sunno.Main.Model.Entities.Genre;
 import com.sunno.Main.Model.Object.OuterListObject;
 import com.sunno.Main.ui.Fragment.Home.Adapter.ParentRecyclerAdapter;
+import com.sunno.Main.ui.OnCategoryClickListener;
 import com.sunno.R;
 import com.sunno.Config.Constants;
 
@@ -40,9 +41,9 @@ public class HomeFragment extends Fragment {
     private ArrayList<String> itemsArrayList;
     private List<Genre> genreListFromMApi;
     private List<ArtistModel> artistListFromMApi;
-    ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener;
+    OnCategoryClickListener onCategoryClickListener;
 
-    public HomeFragment(ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener){
+    public HomeFragment(OnCategoryClickListener onCategoryClickListener){
         this.onCategoryClickListener = onCategoryClickListener;
     }
 
@@ -73,7 +74,9 @@ public class HomeFragment extends Fragment {
         List<InnerListObject> innerListForGenre = new ArrayList<>();
 
         for(Genre genre: innerListGenre){
-            innerListForGenre.add(new InnerListObject(genre.getName(),genre.getImg_url(), Constants.GENRE_FRAGMENT_ID));
+            InnerListObject object = new InnerListObject(genre.getName(),genre.getImg_url(), Constants.GENRE_FRAGMENT_ID);
+            object.setParams(genre);
+            innerListForGenre.add(object);
         }
         genreObject.setInnerListObjectList(innerListForGenre);
         outerListObjectList.add(genreObject);
@@ -105,7 +108,10 @@ public class HomeFragment extends Fragment {
         List<InnerListObject> innerList3 = new ArrayList<>();
 
         for(ArtistModel artistModel:innerListArtist){
-            innerList3.add(new InnerListObject(artistModel.getName(),artistModel.getImg_url(), Constants.ARTIST_FRAGMENT_ID));
+            InnerListObject object = new InnerListObject(artistModel.getName(),artistModel.getImg_url(), Constants.ARTIST_FRAGMENT_ID);
+            object.setParams(artistModel.getId());
+
+            innerList3.add(object);
         }
         object3.setInnerListObjectList(innerList3);
         outerListObjectList.add(object3);

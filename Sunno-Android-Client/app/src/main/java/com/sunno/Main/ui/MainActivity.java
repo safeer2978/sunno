@@ -6,10 +6,14 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.format.Time;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +25,10 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mancj.slideup.SlideUp;
 import com.mancj.slideup.SlideUpBuilder;
+import com.sunno.Config.Constants;
+import com.sunno.Main.Model.Entities.Genre;
 import com.sunno.Main.Model.Object.InnerListObject;
+import com.sunno.Main.NewAccessTokenWorker;
 import com.sunno.Main.ui.Fragment.Home.Adapter.ChildRecyclerAdapter;
 import com.sunno.AuthModule.db.LoginDao;
 import com.sunno.AuthModule.db.LoginDatabase;
@@ -39,12 +46,13 @@ import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements ChildRecyclerAdapter.OnCategoryClickListener  {
+public class MainActivity extends AppCompatActivity implements OnCategoryClickListener  {
 
     private MediaPlayer mediaPlayer;
     private SlideUp slideUp;
@@ -78,6 +86,14 @@ public class MainActivity extends AppCompatActivity implements ChildRecyclerAdap
 
         dao = LoginDatabase.getDatabase(getApplication()).wordDao();
         urlQueue = new ArrayDeque<>();
+
+        WorkRequest request =
+                new PeriodicWorkRequest.Builder(NewAccessTokenWorker.class, Constants.TOKEN_REFRESH_TIME, TimeUnit.SECONDS)
+                        .addTag("ACCESS TOKEN REFRESH")
+                        .build();
+
+        WorkManager workManager = WorkManager.getInstance(this);
+        workManager.enqueue(request);
 
 
         bottomNavView=findViewById(R.id.navBar);
@@ -238,16 +254,16 @@ public class MainActivity extends AppCompatActivity implements ChildRecyclerAdap
         Fragment fragment;
         switch (type){
             case 1:
-                fragment =new GenreResponseFragment();
+                fragment =new GenreResponseFragment(this, (Genre) params.get(0));
                 break;
             case 2:
-                fragment =new ArtistResponseFragment();
+                fragment =new ArtistResponseFragment(this, (Integer) params.get(0));
                 break;
             case 3:
                 fragment= new AlbumResponseFragment((Integer) params.get(0));
                 break;
             default:
-                fragment=new GenreResponseFragment();
+                fragment=new GenreResponseFragment(this, (Genre) params.get(0));
         }
 
         FragmentManager fragmentManager=this.getSupportFragmentManager();

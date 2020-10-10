@@ -11,17 +11,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sunno.Main.Model.Object.OuterListObject;
+import com.sunno.Main.ui.OnCategoryClickListener;
 import com.sunno.R;
 
 import java.util.List;
 
 public class ParentRecyclerAdapter extends RecyclerView.Adapter<ParentRecyclerAdapter.MyViewHolder>{
 
-    private ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener;
+    private OnCategoryClickListener onCategoryClickListener;
     Context context;
     private List<OuterListObject> outerListObjects;
 
-    public ParentRecyclerAdapter(List<OuterListObject> parentArrayList, Context context, ChildRecyclerAdapter.OnCategoryClickListener onCategoryClickListener) {
+    public ParentRecyclerAdapter(List<OuterListObject> parentArrayList, Context context, OnCategoryClickListener onCategoryClickListener) {
         this.outerListObjects = parentArrayList;
         this.context = context;
         this.onCategoryClickListener = onCategoryClickListener;

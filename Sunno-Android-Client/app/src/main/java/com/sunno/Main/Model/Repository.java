@@ -3,6 +3,13 @@ package com.sunno.Main.Model;
 import android.app.Application;
 import android.util.Log;
 
+import com.sunno.AuthModule.data.model.User;
+import com.sunno.AuthModule.db.LoginDao;
+import com.sunno.AuthModule.db.LoginDatabase;
+import com.sunno.AuthModule.network.LoginEndpoints;
+import com.sunno.AuthModule.network.LoginService;
+import com.sunno.AuthModule.network.request.RefreshTokenRequest;
+import com.sunno.AuthModule.network.response.LoginResponse;
 import com.sunno.Main.Model.Entities.AlbumModel;
 import com.sunno.Main.Model.Entities.ArtistModel;
 import com.sunno.Main.Model.Entities.Genre;
@@ -20,6 +27,8 @@ import retrofit2.Response;
 public class Repository {
 
     private ApiEndpoint api;
+
+    LoginDao loginDao;
 
     private static Repository REPOSITORY;
 
@@ -69,6 +78,9 @@ public class Repository {
                         }
                     }
                 });
+
+        loginDao = LoginDatabase.getDatabase(application.getApplicationContext()).wordDao();
+        accountsApi = LoginService.getRetrofitClient().create(LoginEndpoints.class);
     }
 
     public List<Genre> getGenreList(){
@@ -81,6 +93,34 @@ public class Repository {
 
     public List<ArtistModel> getArtistsList(){
         return artistListFromMApi;
+    }
+
+
+    LoginEndpoints accountsApi;
+
+    public void getNewAccessToken(){
+        User user = loginDao.getUser().get(0);
+        String refreshToken = user.getRefreshToken();
+        RefreshTokenRequest refreshTokenRequest = new RefreshTokenRequest(refreshToken);
+        accountsApi.refreshToken(refreshTokenRequest).enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                LoginResponse loginResponse = response.body();
+                assert loginResponse != null;
+                final User user = new User(loginDao.getUser().get(0).getEmail(), loginResponse.getAccessToken(),
+                        loginResponse.getRefreshToken(),
+                        loginResponse.getTokenType(),
+                        loginResponse.getExpiresInMsec());
+                System.out.println(user.getAccessToken());
+                loginDao.dropTable(user);
+                loginDao.insertUser(user);
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+            }
+        });
     }
 
 }
