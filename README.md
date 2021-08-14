@@ -11,15 +11,16 @@ This app implements the MVVM architecture and uses Android Jectpack Components s
 
 ## ScreenShots:
 
-<img src="https://github.com/safeer2978/sunno/blob/master/images/1.png"  width="220"><img src="https://github.com/safeer2978/sunno/blob/master/images/2.png"  width="220"><img src="https://github.com/safeer2978/sunno/blob/master/images/3.png"  width="220"><img src="https://github.com/safeer2978/sunno/blob/master/images/4.png"  width="220">
+<img src="https://github.com/safeer2978/sunno/blob/master/images/3.png" width="225"><img src="https://github.com/safeer2978/sunno/blob/master/images/1.png"  width="220"><img src="https://github.com/safeer2978/sunno/blob/master/images/2.png"  width="222">  <img src="https://github.com/safeer2978/sunno/blob/master/images/4.png"  width="230">
 
 
 ## Design:
 
-<img src="https://github.com/safeer2978/sunno/blob/master/images/arch.png"  width="220">
+
+<img src="https://github.com/safeer2978/sunno/blob/master/images/arch.png" >
 
 
-<img src="https://github.com/safeer2978/sunno/blob/master/images/design.png"  width="220">
+<img src="https://github.com/safeer2978/sunno/blob/master/images/design.png" >
 
 
 
