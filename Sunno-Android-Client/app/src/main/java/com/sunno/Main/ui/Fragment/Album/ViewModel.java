@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.sunno.Main.AddTrackInterface;
 import com.sunno.Main.Model.Entities.AlbumModel;
 import com.sunno.Main.Model.Entities.ArtistModel;
 import com.sunno.Main.Model.Entities.tracks;
@@ -58,6 +59,17 @@ public class ViewModel extends AndroidViewModel {
         }
         return tracks;
 
+    }
+
+
+    AddTrackInterface addTrackInterface;
+
+    public void setAddTrackInterface(AddTrackInterface addTrackInterface) {
+        this.addTrackInterface = addTrackInterface;
+    }
+
+    AddTrackInterface getAddTrackInterface(){
+        return addTrackInterface;
     }
 
 

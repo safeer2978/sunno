@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
+import com.sunno.Main.AddTrackInterface;
 import com.sunno.R;
 
 public class AlbumResponseFragment extends Fragment {
@@ -24,8 +25,11 @@ public class AlbumResponseFragment extends Fragment {
     ViewModel viewModel;
     int albumId;
 
-    public AlbumResponseFragment(int albumId) {
+AddTrackInterface addTrackInterface;
+
+    public AlbumResponseFragment(int albumId, AddTrackInterface addTrackInterface) {
         this.albumId = albumId;
+        this.addTrackInterface = addTrackInterface;
     }
 
     @Nullable
@@ -40,6 +44,7 @@ public class AlbumResponseFragment extends Fragment {
         recyclerView = view.findViewById(R.id.far_rv);
         imageView = view.findViewById(R.id.far_imageView);
         viewModel = ViewModelProviders.of(this).get(ViewModel.class);
+        viewModel.setAddTrackInterface(addTrackInterface);
         viewModel.setAlbum(albumId);
 
 
@@ -59,7 +64,7 @@ public class AlbumResponseFragment extends Fragment {
 
         }
 
-        Adapter adapter = new Adapter(viewModel.getTracks());
+        Adapter adapter = new Adapter(viewModel.getTracks(), viewModel.getAddTrackInterface());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

@@ -41,8 +41,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        editText_prof=view.findViewById(R.id.prof_ET);
         btn=view.findViewById(R.id.btn);
 
     }

@@ -4,30 +4,29 @@
     android:id="@+id/child_rv_item"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:layout_margin="5dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="15dp"
-        app:cardCornerRadius="15dp">
-
+        app:cardCornerRadius="8dp">
             <ImageView
                 android:id="@+id/image_view"
                 android:src="@drawable/ic_launcher_background"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
-
-            <TextView
-                android:id="@+id/nameText_aka_dayText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minLines="2"
-                android:gravity="center"
-                android:text="Artist"
-                android:textColor="@android:color/black"
-                android:textSize="15sp"
-                android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/nameText_aka_dayText"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="22sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Card Name"
+        />
 
 </LinearLayout>

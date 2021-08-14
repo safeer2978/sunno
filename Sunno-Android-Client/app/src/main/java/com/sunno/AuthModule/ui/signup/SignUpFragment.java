@@ -39,12 +39,12 @@ public class SignUpFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final EditText usernameEditText = view.findViewById(R.id.sign_email);
-        final EditText passwordEditText = view.findViewById(R.id.sign_password);
+/*        final EditText passwordEditText = view.findViewById(R.id.sign_password);
         final EditText phoneEditText = view.findViewById(R.id.sign_phone);
         final EditText firstNameEditText = view.findViewById(R.id.sign_first);
         final EditText lastNameEditText = view.findViewById(R.id.sign_last);
         final EditText ageEditText = view.findViewById(R.id.sign_age);
-        final EditText genderEditText = view.findViewById(R.id.sign_gender);
+        final EditText genderEditText = view.findViewById(R.id.sign_gender);*/
         Button signUpButton  = view.findViewById(R.id.sign_UP_btn);
 
         mViewModel = ViewModelProviders.of(this, new SignUpViewModelFactory(this.getActivity().getApplication())).get(SignUpViewModel.class);
@@ -54,7 +54,7 @@ public class SignUpFragment extends Fragment {
 
 
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
+        /*signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //loadingProgressBar.setVisibility(View.VISIBLE);
@@ -68,7 +68,7 @@ public class SignUpFragment extends Fragment {
                 boolean status = mViewModel.signUp(request);
                 Toast.makeText(getContext(), "status: "+status,Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
 
     }

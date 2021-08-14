@@ -3,6 +3,7 @@ package com.sunno.Main.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -26,6 +27,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mancj.slideup.SlideUp;
 import com.mancj.slideup.SlideUpBuilder;
 import com.sunno.Config.Constants;
+import com.sunno.Main.AddTrackInterface;
 import com.sunno.Main.Model.Entities.Genre;
 import com.sunno.Main.Model.Object.InnerListObject;
 import com.sunno.Main.NewAccessTokenWorker;
@@ -52,14 +54,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements OnCategoryClickListener  {
+public class MainActivity extends AppCompatActivity implements OnCategoryClickListener, AddTrackInterface {
 
     private MediaPlayer mediaPlayer;
     private SlideUp slideUp;
     private View dim;
     private View fragmentContainter;
     private View slideView;
-    private CardView crd;
+    private ConstraintLayout crd;
 
     Queue<String> urlQueue;
 
@@ -229,7 +231,8 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener=
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
+            new BottomNavigationView.OnNavigationItemSelectedListener()
+            {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -260,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
                 fragment =new ArtistResponseFragment(this, (Integer) params.get(0));
                 break;
             case 3:
-                fragment= new AlbumResponseFragment((Integer) params.get(0));
+                fragment= new AlbumResponseFragment((Integer) params.get(0), this);
                 break;
             default:
                 fragment=new GenreResponseFragment(this, (Genre) params.get(0));
@@ -293,9 +296,8 @@ public class MainActivity extends AppCompatActivity implements OnCategoryClickLi
     }
 
 
-
-
-     void addTrackToQueue(String trackId){
+    @Override
+    public void addTrackToQueue(String trackId){
         PlayRequest request = new PlayRequest(trackId);
         api = NetworkService.getPlayServiceClient(this,dao.getUser().get(0).getAccessToken()).create(NetworkEndpoint.class);
         api.getUrl(request).enqueue(new Callback<String>() {
