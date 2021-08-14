@@ -11,19 +11,19 @@ This app implements the MVVM architecture and uses Android Jectpack Components s
 
 ## ScreenShots:
 
-<img src="https://github.com/safeer2978/sunno/blob/main/images/1.png"  width="220"><img src="https://github.com/safeer2978/sunno/blob/main/images/2.png"  width="220"><img src="https://github.com/safeer2978/sunno/blob/main/images/3.png"  width="220"><img src="https://github.com/safeer2978/sunno/blob/main/images/4.png"  width="220">
+<img src="https://github.com/safeer2978/sunno/blob/master/images/1.png"  width="220"><img src="https://github.com/safeer2978/sunno/blob/master/images/2.png"  width="220"><img src="https://github.com/safeer2978/sunno/blob/master/images/3.png"  width="220"><img src="https://github.com/safeer2978/sunno/blob/master/images/4.png"  width="220">
 
 
 ## Design:
 
-<img src="https://github.com/safeer2978/sunno/blob/main/images/arch.png"  width="220">
+<img src="https://github.com/safeer2978/sunno/blob/master/images/arch.png"  width="220">
 
 
-<img src="https://github.com/safeer2978/sunno/blob/main/images/design.png"  width="220">
+<img src="https://github.com/safeer2978/sunno/blob/master/images/design.png"  width="220">
 
 
 
-##Contributing
+## Contributing
 
 I'll be really happy if you contribute to this project. If you have any ideas on fetures, any improvements etc feel free to send a request.
 
@@ -32,7 +32,7 @@ Simply pull the repo, add your ideas and create a pull request. You can also ope
 Please use the "Issues" function for comments.
 
 
-##Licence
+## Licence
 Copyright 2020 Safeer Khan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
